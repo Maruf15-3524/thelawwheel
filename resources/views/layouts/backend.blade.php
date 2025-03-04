@@ -283,6 +283,65 @@
             position: relative;
         }
 
+        .loader {
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #3498db;
+            border-radius: 50%;
+            width: 60px;
+            /* Increased size for better visibility */
+            height: 60px;
+            /* Increased size for better visibility */
+            animation: spin 1s linear infinite, fadeOut 0.5s ease-in-out forwards;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: none;
+            /* Initially hidden */
+            z-index: 9999;
+            opacity: 1;
+            /* Full opacity for when shown */
+            transition: opacity 0.5s ease-in-out;
+            /* Smooth fade-out transition */
+        }
+
+        @keyframes spin {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Extra shimmer effect */
+        @keyframes shimmer {
+            0% {
+                background-color: #3498db;
+            }
+
+            50% {
+                background-color: #9b59b6;
+            }
+
+            100% {
+                background-color: #3498db;
+            }
+        }
+
+
+
         /* Responsive Styles */
         @media (max-width: 767px) {
             .toggle-btn {
@@ -345,6 +404,7 @@
 </head>
 
 <body>
+    <div class="loader" id="loader"></div>
 
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
@@ -478,7 +538,7 @@
         <a href="{{ route('users.index') }}" class="{{ Route::is('users.*') ? 'active' : '' }}">
             <i class="fas fa-users"></i> <span>Users</span>
         </a>
-        <a href="{{ route('teammembers.index') }}" class="{{ Route::is('teammembers.*') ? 'active' : '' }}"><i class="fas fa-ticket-alt"></i> <span>Team Member</span></a>
+        <a href="{{ route('teammembers.index') }}" class="{{ Route::is('teammembers.*') ? 'active' : '' }}" onclick="showLoader()"><i class="fas fa-ticket-alt"></i> <span>Team Member</span></a>
 
         <a href="{{ route('resources.index') }}" class="{{ Route::is('resources.*') ? 'active' : '' }}"><i class="fas fa-ticket-alt"></i> <span>Resource</span></a>
 
@@ -524,6 +584,24 @@
             const toggleBtn = document.querySelector('.toggle-btn');
             toggleBtn.innerHTML = sidebar.classList.contains('collapsed') ? '&#x276F;' : '&#x276E;';
         }
+
+        function showLoader() {
+            const loader = document.getElementById("loader");
+            loader.style.display = "block"; // Show the loader
+            loader.style.opacity = 1; // Make sure it's fully visible
+
+            // Optional: You can add a delay here before the loader disappears
+            setTimeout(function() {
+                loader.style.display = "none"; // Hide the loader after some time
+            }, 3000); // 3 seconds (adjust based on your needs)
+        }
+
+        window.addEventListener("load", function() {
+            document.getElementById("loader").style.opacity = 0; // Fade out the loader
+            setTimeout(function() {
+                document.getElementById("loader").style.display = "none"; // Hide the loader after fading
+            }, 500); // 0.5 seconds for the fade-out effect
+        });
     </script>
 
 
