@@ -68,15 +68,15 @@ class TeamMemberController extends Controller
         $teamMember = TeamMember::findOrFail($id);
 
         // Validate request
-        $request->validate([
-            'full_name' => 'required|string|max:255',
-            'degree' => 'required|string|max:255',
-            'designation' => 'required|string|max:255',
-            'role' => 'required|string',
-            'order' => 'required|integer',
-            'description' => 'nullable|string',
-            'profile_pic' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
-        ]);
+        // $request->validate([
+        //     'full_name' => 'required|string|max:255',
+        //     'degree' => 'required|string|max:255',
+        //     'designation' => 'required|string|max:255',
+        //     'role' => 'required|string',
+        //     'order' => 'required|integer',
+        //     'description' => 'nullable|string',
+        //     'profile_pic' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048',
+        // ]);
 
         // Image Upload Logic
         if ($request->hasFile('profile_pic')) {

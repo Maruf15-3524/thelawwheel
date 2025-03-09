@@ -12,7 +12,7 @@
     <link href="{{asset('frontend/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
     <link href="{{asset('frontend/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css')}}" rel="stylesheet" />
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="{{('frontend/style.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/style.css')}}">
 </head>
 <body>
     <div class="wraper">

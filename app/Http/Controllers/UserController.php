@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Models\TeamMember;
+use Illuminate\Support\Str;  
 
 class UserController extends Controller
 {
@@ -137,7 +139,29 @@ class UserController extends Controller
     }
     public function team()
     {
-       return View('frontend.team');
+
+        // $teamMembers = TeamMember::all();
+        // return view('frontend.team', compact('teamMembers'));
+
+        $teamMembers = TeamMember::orderBy('order', 'asc')->get()->groupBy('role');
+
+        return view('frontend.team', compact('teamMembers'));
+
+    //    return View('frontend.team');
+    }
+
+    public function show_team_datails($id, $slug) {
+        // Fetch the team member by ID
+        $member = TeamMember::findOrFail($id);
+        
+        // You can also use the $slug if needed for further validation or other logic
+        // For example, ensure the slug matches the member's full_name
+        if (Str::slug($member->full_name) !== $slug) {
+            abort(404); 
+        }
+        
+        // Return the view with the member data
+        return view('frontend.teammember_details', compact('member'));
     }
     public function book()
     {

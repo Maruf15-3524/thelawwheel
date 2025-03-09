@@ -8,6 +8,7 @@ use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\TeamMemberController;
 
+
 Route::get('/', function () {
     return view('frontend.index');
 })->name('index');
@@ -18,6 +19,10 @@ Route::get('/our-team', [UserController::class, 'team'])->name('team');
 Route::get('/book', [UserController::class, 'book'])->name('book');
 Route::get('/research', [UserController::class, 'research'])->name('research');
 Route::get('/video', [UserController::class, 'video'])->name('video');
+// Route::get('/team/{id}', [UserController::class, 'show_team_datails'])->name('team.show');
+Route::get('/team/{id}/{slug}', [UserController::class, 'show_team_datails'])->name('team.show');
+
+
 
 
 Route::middleware('auth')->group(function () {

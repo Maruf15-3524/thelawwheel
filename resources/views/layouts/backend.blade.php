@@ -2,6 +2,17 @@
 <html lang="en">
 
 <head>
+    <script>
+        (function() {
+            window.history.forward();
+        })();
+
+        window.onpageshow = function(event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        };
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'Default Title')</title>
